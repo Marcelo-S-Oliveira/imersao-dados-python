@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+
+# Tenta importar plotly; se não tiver no ambiente do Streamlit, instala e tenta de novo.
+try:
+    import plotly.express as px
+except ModuleNotFoundError:
+    import sys, subprocess
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "plotly==5.24.1"])
+    import plotly.express as px
 
 # --- Configuração da Página ---
 # Define o título da página, o ícone e o layout para ocupar a largura inteira.
@@ -135,4 +142,5 @@ with col_graf4:
 
 # --- Tabela de Dados Detalhados ---
 st.subheader("Dados Detalhados")
+
 st.dataframe(df_filtrado)
